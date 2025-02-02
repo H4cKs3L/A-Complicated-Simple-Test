@@ -1,0 +1,23 @@
+---
+- name: Disable password authentication and configure SSH Root
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Disable password authentication in SSH config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+        state: present
+
+    - name: Restart sshd
+      service:
+        name: sshd
+        state: restarted
+
+    - name: Generate SSH key pair for root user
+      openssh_keypair:
+        path: /root/.ssh/id_rsa
+        force: no # Ne créer pas de clé, s'il en déjà une existante
+        type: rsa
+        size: 4096
