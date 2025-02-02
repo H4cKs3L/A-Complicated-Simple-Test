@@ -1,0 +1,38 @@
+---
+- name: Install Docker on Rocky Linux
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install required packages
+      dnf:
+        name:
+          - dnf-plugins-core
+          - curl
+          - git
+        state: present
+
+    - name: Add Docker repository
+      command: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+      args:
+        creates: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker CE
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: present
+
+    - name: Enable and start Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Add s2m-user to Docker group
+      user:
+        name: s2m-user
+        groups: docker
+        append: yes
