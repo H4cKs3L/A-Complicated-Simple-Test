@@ -40,4 +40,6 @@ Les fichiers sont dans le dossier [docker](docker).
 
 # Level 3: The Containers
 
-## Tasks 2 :
+## Tasks 2 : Orchestration 
+
+Je n'ai honnement pas réussi à faire foncionner l'ingress sur la VM. Je pense que les fichiers sont corrects mais je n'arrive pas à trouver l'erreur.
