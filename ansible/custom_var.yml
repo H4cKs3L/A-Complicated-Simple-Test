@@ -1,0 +1,12 @@
+---
+- name: Setup environment variable for all users using /etc/profile.d/
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Create a custom environment variable script in /etc/profile.d/
+      copy:
+        dest: /etc/profile.d/my_env_variable.sh
+        content: |
+          #!/bin/bash
+          export MY_VARIABLE="my_value"
+        mode: '0755'

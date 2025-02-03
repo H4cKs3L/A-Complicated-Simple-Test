@@ -1,0 +1,9 @@
+api_rest1
+api_rest2
+my-go-app1-0.0.3-1.x86_64.rpm
+my-go-app2-0.0.1-1.x86_64.rpm
+node_modules
+truc
+dist
+.parcel-cache
+yarn.lock

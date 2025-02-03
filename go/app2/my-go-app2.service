@@ -1,0 +1,11 @@
+[Unit]
+Description=My Go Application 2
+
+[Service]
+ExecStart=/opt/my-go-app2/api_rest2
+WorkingDirectory=/opt/my-go-app2
+Restart=always
+Environment=LOG_LEVEL=debug
+
+[Install]
+WantedBy=multi-user.target

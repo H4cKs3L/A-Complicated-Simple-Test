@@ -1,0 +1,24 @@
+---
+- name: Install and configure PostgreSQL with SELinux
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install the PostgreSQL repository
+      dnf:
+        name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        state: present
+        disable_gpg_check: yes  # Ignorer la vérification GPG du dépôt
+
+    - name: Install PostgreSQL
+      dnf:
+        name: postgresql14-server
+        state: present
+
+    - name: Initialize PostgreSQL database
+      command: /usr/pgsql-14/bin/postgresql-14-setup initdb
+
+    - name: Enable PostgreSQL service
+      systemd:
+        name: postgresql-14
+        enabled: true
+        state: started

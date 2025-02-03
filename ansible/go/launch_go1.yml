@@ -1,0 +1,13 @@
+---
+- name: Build RPM Go app 1
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Build Go app 1
+      shell: |
+        cd /mnt/hgfs/A-Complicated-Simple-Test/go
+        go build -o api_rest1
+    - name: Build RPM package using FPM
+      shell: |
+        fpm -s dir -t rpm -n my-go-app1 -v 0.0.1 --prefix /opt/my-go-app1 /mnt/hgfs/A-Complicated-Simple-Test/go/api_rest1
+        mv my-go-app1-0.0.1-1.x86_64.rpm /mnt/hgfs/A-Complicated-Simple-Test/go/
